@@ -1,0 +1,321 @@
+/* styles2.css */
+
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+#dashboard-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+#nav-panel {
+    background-color: #007bff;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+#brand-heading {
+    font-family: 'fantastic-font', sans-serif;
+    font-size: 28px;
+    color: white;
+    margin: 0;
+}
+
+#nav-panel button {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 20px;
+    margin-left: 15px;
+    padding: 12px 24px;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+#nav-panel button:hover {
+    color: #fff;
+    background-color: #0056b3;
+    text-decoration: underline;
+}
+
+#content-panel {
+    padding: 30px;
+    flex-grow: 1;
+}
+
+.content-section {
+    display: none;
+}
+
+#dashboard-section {
+    display: block;
+    text-align: center;
+}
+
+#timetable-section table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+}
+
+#timetable-section table,
+#timetable-section th,
+#timetable-section td {
+    border: 1px solid #ddd;
+}
+
+#timetable-section th,
+#timetable-section td {
+    padding: 15px;
+    text-align: left;
+}
+
+#timetable-section th {
+    background-color: #007bff;
+    color: white;
+}
+
+#classes-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.link-buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.link-buttons button {
+    background-color: transparent;
+    border: 2px solid #28a745;
+    color: #28a745;
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 25px;
+    margin-left: 15px;
+    padding: 12px 24px;
+    font-weight: bold;
+    font-family: 'Arial', sans-serif;
+    transition: color 0.3s, background-color 0.3s, border-color 0.3s;
+}
+
+.link-buttons button:hover {
+    color: #218838;
+    background-color: #e6f7e6;
+    border-color: #218838;
+    text-decoration: none;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif; /* Changed font family */
+    background-image: url('bg3.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#login-container, #register-container {
+    background-color: rgba(255, 255, 255, 0.9); /* Increased opacity for better readability */
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    max-width: 400px;
+    width: 100%;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+    font-size: 24px; /* Changed font size */
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    color: #555;
+    font-size: 16px; /* Changed font size */
+}
+
+input {
+    width: 100%;
+    padding: 12px; /* Increased padding for better touch feel */
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    border: 2px solid #007BFF; /* Added border to input fields */
+    border-radius: 8px;
+    font-size: 16px; /* Changed font size */
+}
+
+button {
+    width: 100%;
+    padding: 14px; /* Increased padding for better touch feel */
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    font-size: 18px; /* Changed font size */
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#login-container, #register-container {
+    transition: opacity 1s ease-in-out;
+}
+
+.login-switch-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.login-switch-container button {
+    cursor: pointer;
+    padding: 12px 18px; /* Increased padding for better touch feel */
+    border: none;
+    outline: none;
+    font-size: 18px; /* Changed font size */
+    border-radius: 8px;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.login-switch-container button.selected {
+    opacity: 1;
+    background-color: #007BFF;
+    color: white;
+}
+
+.login-switch-container button:not(.selected) {
+    opacity: 0.8; /* Adjusted opacity for better visual hierarchy */
+    background-color: #ddd;
+    color: #333;
+}
+/* Add these styles to your existing CSS code */
+
+/* Styling for content inside the Attendance, Timetable, and Assignments tabs */
+.content-section {
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    margin-top: 20px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #007BFF;
+    font-size: 24px;
+}
+A
+/* Styling for the Attendance form */
+#attendanceForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#attendanceForm label,
+#attendanceForm select {
+    margin: 10px 0;
+}
+
+#attendanceForm button {
+    width: auto;
+    padding: 14px; /* Increased padding for the button */
+    background-color: #28a745; /* Green color for the button */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    opacity: 0.9; /* Reduced opacity */
+}
+
+#attendanceForm button:hover {
+    background-color: #218838; /* Darker green on hover */
+    opacity: 1;
+}
+
+/* Styling for the Timetable table */
+#timetableTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#timetableTable th,
+#timetableTable td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+}
+
+#timetableTable th {
+    background-color: #007BFF;
+    color: white;
+}
+
+/* Styling for the Assignment upload form */
+#assignmentForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#assignmentForm input[type="file"] {
+    margin: 10px 0;
+    padding: 14px; /* Increased padding for the file input */
+    background-color: #007BFF; /* Blue color for the file input */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    opacity: 0.9; /* Reduced opacity */
+}
+
+#assignmentForm input[type="file"]:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    opacity: 1;
+}
+
+#assignmentForm button {
+    margin: 10px 0;
+    width: auto;
+    padding: 14px; /* Increased padding for the button */
+    background-color: #dc3545; /* Red color for the button */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    opacity: 0.9; /* Reduced opacity */
+}
+
+#assignmentForm button:hover {
+    background-color: #c82333; /* Darker red on hover */
+    opacity: 1;
+}

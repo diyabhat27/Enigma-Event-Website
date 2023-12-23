@@ -1,0 +1,201 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif; /* Changed font family */
+    background-image: url('bg3.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#login-container, #register-container {
+    background-color: rgba(255, 255, 255, 0.9); /* Increased opacity for better readability */
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    max-width: 400px;
+    width: 100%;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+    font-size: 24px; /* Changed font size */
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    color: #555;
+    font-size: 16px; /* Changed font size */
+}
+
+input {
+    width: 100%;
+    padding: 12px; /* Increased padding for better touch feel */
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    border: 2px solid #007BFF; /* Added border to input fields */
+    border-radius: 8px;
+    font-size: 16px; /* Changed font size */
+}
+
+button {
+    width: 100%;
+    padding: 14px; /* Increased padding for better touch feel */
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    font-size: 18px; /* Changed font size */
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#login-container, #register-container {
+    transition: opacity 1s ease-in-out;
+}
+
+.login-switch-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.login-switch-container button {
+    cursor: pointer;
+    padding: 12px 18px; /* Increased padding for better touch feel */
+    border: none;
+    outline: none;
+    font-size: 18px; /* Changed font size */
+    border-radius: 8px;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.login-switch-container button.selected {
+    opacity: 1;
+    background-color: #007BFF;
+    color: white;
+}
+
+.login-switch-container button:not(.selected) {
+    opacity: 0.8; /* Adjusted opacity for better visual hierarchy */
+    background-color: #ddd;
+    color: #333;
+}
+/* Add these styles to your existing CSS code */
+
+/* Styling for content inside the Attendance, Timetable, and Assignments tabs */
+.content-section {
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    margin-top: 20px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #007BFF;
+    font-size: 24px;
+}
+
+/* Styling for the Attendance form */
+#attendanceForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#attendanceForm label,
+#attendanceForm select {
+    margin: 10px 0;
+}
+
+#attendanceForm button {
+    width: auto;
+    padding: 14px; /* Increased padding for the button */
+    background-color: #28a745; /* Green color for the button */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    opacity: 0.9; /* Reduced opacity */
+}
+
+#attendanceForm button:hover {
+    background-color: #218838; /* Darker green on hover */
+    opacity: 1;
+}
+
+/* Styling for the Timetable table */
+#timetableTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#timetableTable th,
+#timetableTable td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+}
+
+#timetableTable th {
+    background-color: #007BFF;
+    color: white;
+}
+
+/* Styling for the Assignment upload form */
+#assignmentForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#assignmentForm input[type="file"] {
+    margin: 10px 0;
+    padding: 14px; /* Increased padding for the file input */
+    background-color: #007BFF; /* Blue color for the file input */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    opacity: 0.9; /* Reduced opacity */
+}
+
+#assignmentForm input[type="file"]:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    opacity: 1;
+}
+
+#assignmentForm button {
+    margin: 10px 0;
+    width: auto;
+    padding: 14px; /* Increased padding for the button */
+    background-color: #dc3545; /* Red color for the button */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    opacity: 0.9; /* Reduced opacity */
+}
+
+#assignmentForm button:hover {
+    background-color: #c82333; /* Darker red on hover */
+    opacity: 1;
+}

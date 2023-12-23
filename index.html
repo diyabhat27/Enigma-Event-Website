@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Add these scripts to your HTML head -->
+<script src="https://www.gstatic.com/firebasejs/9.6.5/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.5/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.5/firebase-database.js"></script>
+
+</head>
+<body>
+    <div id="login-container">
+        <h1>Login</h1>
+        <form id="login-form">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Login</button>
+        </form>
+        <div class="login-switch-container">
+            <button id="student-login-btn" class="selected">Student Login</button>
+            <button id="teacher-login-btn">Teacher Login</button>
+        </div>
+        <button id="register-btn">Register</button>
+    </div>
+
+    <div id="register-container" style="display: none;">
+        <h1>Register</h1>
+        <form id="register-form">
+            <label for="reg-email">Email:</label>
+            <input type="email" id="reg-email" name="reg-email" required>
+            <label for="reg-password">Password:</label>
+            <input type="password" id="reg-password" name="reg-password" required>
+            <button type="submit">Register</button>
+        </form>
+        <button id="back-to-login-btn">Back to Login</button>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-auth.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

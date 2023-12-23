@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+    <link rel="stylesheet" href="styles2.css">
+</head>
+<body>
+    <div id="dashboard-container">
+        <div id="nav-panel">
+            <button onclick="showSection('dashboard-section')">Dashboard</button>
+            <button onclick="showSection('classes-section')">Classes</button>
+            <button onclick="showSection('timetable-section')">Timetable</button>
+            <button onclick="showSection('attendance-section')">Attendance</button>
+            <button onclick="showAssignmentsSection()">Assignments</button> <!-- Added Assignments button -->
+        </div>
+        <div id="content-panel">
+            <div id="dashboard-section" class="content-section">
+                <h2>Welcome to the Dashboard!</h2>
+                <!-- Add Dashboard content here -->
+            </div>
+            <div id="classes-section" class="content-section">
+                <h2>Classes</h2>
+                <div id="current-class"></div>
+            </div>
+            <div id="timetable-section" class="content-section">
+                <h2>Timetable</h2>
+                <input type="file" id="fileInput" accept=".xlsx, .xls" />
+                <button onclick="handleFile()">Upload Timetable</button>
+                <div id="calendar"></div>
+            </div>
+            <div id="attendance-section" class="content-section">
+                <h2>Attendance</h2>
+                <form id="attendanceForm">
+                    <label for="studentName">Student Name:</label>
+                    <input type="text" id="studentName" name="studentName" required>
+                    <label for="classDate">Class Date:</label>
+                    <input type="date" id="classDate" name="classDate" required>
+                    <label for="status">Attendance Status:</label>
+                    <select id="status" name="status" required>
+                        <option value="present">Present</option>
+                        <option value="absent">Absent</option>
+                    </select>
+                    <button type="button" onclick="markAttendance()">Submit</button>
+                </form>
+            </div>
+            <div id="assignments-section" class="content-section" style="display: none;">
+                <h2>Assignments</h2>
+                <form id="assignment-form">
+                    <label for="fileInput">Upload Document:</label>
+                    <input type="file" id="fileInput" accept=".pdf, .doc, .docx" />
+                    <button type="button" onclick="submitAssignment()">Submit</button>
+                </form>
+                <div id="assignment-message"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variable to store timetable data
+        let timetableData;
+
+        function showSection(sectionId) {
+            const sections = document.getElementsByClassName('content-section');
+            for (const section of sections) {
+                section.style.display = 'none';
+            }
+
+            document.getElementById(sectionId).style.display = 'block';
+
+            if (sectionId === 'classes-section') {
+                updateClassesSection();
+            }
+        }
+
+        function showAssignmentsSection() {
+            hideAllSections();
+            document.getElementById('assignments-section').style.display = 'block';
+        }
+
+        function hideAllSections() {
+            const sections = document.getElementsByClassName('content-section');
+            for (const section of sections) {
+                section.style.display = 'none';
+            }
+        }
+
+        function handleFile() {
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    const data = new Uint8Array(e.target.result);
+                    const workbook = XLSX.read(data, { type: 'array' });
+
+                    // Save timetable data globally
+                    timetableData = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]], { header: 1 });
+
+                    // Render the timetable
+                    renderTimetable(timetableData);
+                    updateClassesSection();
+                };
+
+                reader.readAsArrayBuffer(file);
+            } else {
+                alert('Please select a file.');
+            }
+        }
+
+        function updateClassesSection() {
+            const currentDate = new Date();
+            const currentDay = currentDate.toLocaleDateString('en-US', { weekday: 'long' });
+            const currentTime = currentDate.getHours() * 60 + currentDate.getMinutes();
+
+            // Find the current and next classes
+            let currentClass = '';
+            let nextClass = '';
+
+            for (let i = 1; i < timetableData.length; i++) {
+                const classStartTime = convertTimeToMinutes(timetableData[i][1]);
+                const classEndTime = convertTimeToMinutes(timetableData[i][2]);
+                const classDay = timetableData[i][0].toLowerCase();
+
+                if (classStartTime <= currentTime && currentTime < classEndTime && classDay === currentDay) {
+                    currentClass = timetableData[i][3];
+                    nextClass = (i + 1 < timetableData.length) ? timetableData[i + 1][3] : '';
+                    break;
+                }
+            }
+
+            const classesSection = document.getElementById('current-class');
+            classesSection.innerHTML = `<p>Current Class: ${currentClass}</p><p>Next Class: ${nextClass}</p>`;
+
+            // Display link buttons
+            const linkButtons = document.createElement('div');
+            linkButtons.className = 'link-buttons';
+
+            const addLinkButton = document.createElement('button');
+            addLinkButton.textContent = 'Add Link';
+            addLinkButton.onclick = () => showLinkInput(currentClass);
+
+            linkButtons.appendChild(addLinkButton);
+            classesSection.appendChild(linkButtons);
+        }
+
+        function renderTimetable(data) {
+            const events = [];
+
+            for (let i = 1; i < data.length; i++) {
+                const rowData = data[i];
+
+                const startTime = moment(rowData[1], 'HH:mm');
+                const endTime = moment(rowData[2], 'HH:mm');
+
+                events.push({
+                    title: rowData[3],
+                    start: startTime,
+                    end: endTime,
+                    className: 'timetable-event',
+                    link: rowData[rowData.length - 1], // Assuming link is in the last column
+                });
+            }
+
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay',
+                },
+                defaultView: 'agendaWeek',
+                events: events,
+                eventClick: function (calEvent, jsEvent, view) {
+                    // Handle event click (e.g., open link)
+                    window.open(calEvent.link, '_blank');
+                },
+            });
+        }
+
+        function showLinkInput(className) {
+            const linkButtons = document.querySelector('.link-buttons');
+
+            const linkInput = document.createElement('input');
+            linkInput.type = 'text';
+            linkInput.placeholder = 'Enter video session link';
+
+            const saveLinkButton = document.createElement('button');
+            saveLinkButton.textContent = 'Save';
+            saveLinkButton.onclick = () => saveLink(className, linkInput.value);
+
+            linkButtons.appendChild(linkInput);
+            linkButtons.appendChild(saveLinkButton);
+        }
+
+        function convertTimeToMinutes(time) {
+            const [hours, minutes] = time.split(':');
+            return parseInt(hours) * 60 + parseInt(minutes);
+        }
+
+        // New Assignment Functions
+        function submitAssignment() {
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+
+            if (file) {
+                // Implement Firebase storage logic here
+                // For example, you can use the Firebase Storage SDK to upload the file
+
+                // Display success message
+                displayAssignmentMessage('Assignment submitted successfully!');
+            } else {
+                displayAssignmentMessage('Please select a file.');
+            }
+        }
+
+        function displayAssignmentMessage(message) {
+            const assignmentMessage = document.getElementById('assignment-message');
+            assignmentMessage.textContent = message;
+        }
+    </script>
+</body>
+</html>
